@@ -44,8 +44,15 @@ public class PersonneController {
 
     // DELETE /personnes/{id}
     @DeleteMapping("/personnes/{id}")
-    public void delete(@PathVariable("id") Integer id){
+    public ResponseEntity delete(@PathVariable("id") Integer id){
+        Personne p = personneService.findById(id);
+        if(p == null){
+            return ResponseEntity.notFound().build();
+        }
+
         personneService.delete(id);
+        return ResponseEntity.ok().build();
+
     }
 
     // PUT /personnes/{id}
