@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toCollection;
 
@@ -15,7 +16,8 @@ public class PersonneService {
     private int idCount = 0;
 
     public List<Personne> getAll(){
-        return personnes.values().stream().collect(toCollection(ArrayList::new));
+        //return personnes.values().stream().collect(toCollection(ArrayList::new));
+        return personnes.values().stream().collect(Collectors.toList());
     }
 
     public void add(Personne personne){
