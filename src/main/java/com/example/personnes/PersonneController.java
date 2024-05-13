@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,25 +24,31 @@ public class PersonneController {
     // API REST:
     // GET /personnes
     @GetMapping("/personnes")
-    public List<Personne> getPersonnes(){
-        return personneService.getAll();
+    public List<PersonneDTO> getPersonnes(){
+        List<Personne> personnes = personneService.getAll();
+        List<PersonneDTO> dtos = new ArrayList<>();
+        for(Personne p: personnes){
+            dtos.add(PersonneMapper.toDTO(p));
+        }
+        return dtos;
     }
     // POST /personnes
     @PostMapping("/personnes")
     public void addPersonn(@RequestBody Personne personne){
+        System.out.println(personne);
         personneService.add(personne);
     }
 
     // GET /personnes/{id}
     // exemple : /personnes/2
     @GetMapping("/personnes/{id}")
-    public ResponseEntity findById(@PathVariable("id") Integer id){
+    public ResponseEntity<PersonneDTO> findById(@PathVariable("id") Integer id){
         Personne p = personneService.findById(id);
         if(p == null){
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(p);
+        return ResponseEntity.ok(PersonneMapper.toDTO(p));
     }
 
     // DELETE /personnes/{id}

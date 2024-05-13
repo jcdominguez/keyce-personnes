@@ -1,21 +1,17 @@
 package com.example.personnes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class Personne {
+public class PersonneDTO {
 
     private Integer id;
     private String prenom;
     private String nom;
-    //@JsonIgnore
-    private String password;
 
-    public Personne(String prenom, String nom) {
+    public PersonneDTO(String prenom, String nom) {
         this.prenom = prenom;
         this.nom = nom;
     }
 
-    public Personne() {
+    public PersonneDTO() {
     }
 
     public Integer getId() {
@@ -42,21 +38,12 @@ public class Personne {
         this.nom = nom;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "Personne{" +
                 "id=" + id +
                 ", prenom='" + prenom + '\'' +
                 ", nom='" + nom + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }
