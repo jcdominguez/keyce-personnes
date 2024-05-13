@@ -43,5 +43,8 @@ public class PersonneController {
     }
 
     // PUT /personnes/{id}
-
+    @PutMapping("/personnes/{id}")
+    public void update(@PathVariable("id") Integer id, @RequestBody Personne personne){
+        personneService.update(id, personne);
+    }
 }

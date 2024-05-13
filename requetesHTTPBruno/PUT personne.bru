@@ -1,0 +1,18 @@
+meta {
+  name: PUT personne
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://localhost:8080/personnes/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "prenom":"Alain",
+    "nom":"Durand"
+  }
+}

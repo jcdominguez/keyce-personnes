@@ -30,8 +30,8 @@ public class PersonneService {
         return personnes.get(id);
     }
 
-    public void update(Personne personne){
-        personnes.put(personne.getId(), personne);
+    public void update(Integer id, Personne personne){
+        personnes.put(id, personne);
     }
 
     public void delete(Integer id){
