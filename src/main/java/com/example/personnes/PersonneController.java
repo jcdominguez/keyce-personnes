@@ -1,6 +1,7 @@
 package com.example.personnes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +33,13 @@ public class PersonneController {
     // GET /personnes/{id}
     // exemple : /personnes/2
     @GetMapping("/personnes/{id}")
-    public Personne findById(@PathVariable("id") Integer id){
-        return personneService.findById(id);
+    public ResponseEntity findById(@PathVariable("id") Integer id){
+        Personne p = personneService.findById(id);
+        if(p == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(p);
     }
 
     // DELETE /personnes/{id}
