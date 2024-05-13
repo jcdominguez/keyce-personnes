@@ -35,7 +35,13 @@ public class PersonneController {
     public Personne findById(@PathVariable("id") Integer id){
         return personneService.findById(id);
     }
-    // PUT /personnes/{id}
+
     // DELETE /personnes/{id}
+    @DeleteMapping("/personnes/{id}")
+    public void delete(@PathVariable("id") Integer id){
+        personneService.delete(id);
+    }
+
+    // PUT /personnes/{id}
 
 }
