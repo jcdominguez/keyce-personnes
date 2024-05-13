@@ -1,6 +1,8 @@
 package com.example.personnes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,7 +59,16 @@ public class PersonneController {
 
     // PUT /personnes/{id}
     @PutMapping("/personnes/{id}")
-    public void update(@PathVariable("id") Integer id, @RequestBody Personne personne){
+    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Personne personne){
+        if(! id.equals(personne.getId()))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        Personne p = personneService.findById(id);
+        if(p == null){
+            return ResponseEntity.status(404).build();
+        }
+
         personneService.update(id, personne);
+        return ResponseEntity.ok().build();
     }
 }
