@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toCollection;
+
 @Service
 public class PersonneService {
 
@@ -12,8 +14,8 @@ public class PersonneService {
     private Map<Integer, Personne> personnes = new HashMap<>();
     private int idCount = 0;
 
-    public Collection<Personne> getAll(){
-        return personnes.values();
+    public List<Personne> getAll(){
+        return personnes.values().stream().collect(toCollection(ArrayList::new));
     }
 
     public void add(Personne personne){
