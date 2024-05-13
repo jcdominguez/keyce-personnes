@@ -13,4 +13,11 @@ public class PersonneController {
         return "Hello SpringBoot";
     }
 
+    // API REST:
+    // GET /personnes
+    // POST /personnes
+    // GET /personnes/{id}
+    // PUT /personnes/{id}
+    // DELETE /personnes/{id}
+
 }
