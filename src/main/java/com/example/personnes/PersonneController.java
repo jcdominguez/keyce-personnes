@@ -1,10 +1,7 @@
 package com.example.personnes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +30,11 @@ public class PersonneController {
     }
 
     // GET /personnes/{id}
+    // exemple : /personnes/2
+    @GetMapping("/personnes/{id}")
+    public Personne findById(@PathVariable("id") Integer id){
+        return personneService.findById(id);
+    }
     // PUT /personnes/{id}
     // DELETE /personnes/{id}
 
