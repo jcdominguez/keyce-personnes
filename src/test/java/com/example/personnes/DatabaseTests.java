@@ -52,4 +52,11 @@ class DatabaseTests {
 			personneRepository.save(personne);
 		}
 	}
+
+	@Test
+	void searchByNom(){
+		List<Personne> familleDupont = personneRepository.findAllByNom("Dupont");
+		for(Personne p : familleDupont)
+			System.out.println(p);
+	}
 }
