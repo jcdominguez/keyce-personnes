@@ -1,15 +1,12 @@
 package com.example.personnes;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toCollection;
-
 @Service
-public class PersonneService {
+public class PersonneService implements Annuaire {
 
     //private ArrayList<Personne> personnes = new ArrayList<>();
     private Map<Integer, Personne> personnes = new HashMap<>();
@@ -26,8 +23,12 @@ public class PersonneService {
         personnes.put(idCount, personne);
     }
 
-    public Personne findById(Integer id){
-        return personnes.get(id);
+    public Optional<Personne> findById(Integer id){
+        Personne p = personnes.get(id);
+        if(p == null)
+            return Optional.empty();
+        else
+            return Optional.of(p);
     }
 
     public void update(Integer id, Personne personne){
