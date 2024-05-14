@@ -14,6 +14,8 @@ class DatabaseRelationTests {
 	private PersonneRepository personneRepository;
 	@Autowired
 	private AdresseRepository adresseRepository;
+	@Autowired
+	private StageRepository stageRepository;
 
 
 	@Test
@@ -53,5 +55,24 @@ class DatabaseRelationTests {
 			Adresse adresse = personne.getAdresse();
 			System.out.println(adresse);
 		}
+	}
+
+	@Test
+	void stage(){
+		Personne eric = new Personne("Eric", "Schmidt");
+		personneRepository.save(eric);
+		Personne julie = new Personne("Julie", "Durand");
+		personneRepository.save(julie);
+
+		Stage java = new Stage();
+		java.setNom("Java");
+		java.addStagiaire(eric);
+		java.addStagiaire(julie);
+		stageRepository.save(java);
+
+		Stage salsa = new Stage();
+		salsa.setNom("Salsa");
+		salsa.addStagiaire(julie);
+		stageRepository.save(salsa);
 	}
 }
