@@ -59,4 +59,12 @@ class DatabaseTests {
 		for(Personne p : familleDupont)
 			System.out.println(p);
 	}
+
+	@Test
+	void searchByPrenomAndNom(){
+		List<Personne> personnes = personneRepository.findAllByPrenomAndNom("Marie", "Dupont");
+		for(Personne p : personnes)
+			System.out.println(p);
+
+	}
 }

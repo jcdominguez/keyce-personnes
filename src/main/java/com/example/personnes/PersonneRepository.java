@@ -9,4 +9,5 @@ import java.util.List;
 public interface PersonneRepository extends JpaRepository<Personne,Integer> {
 
     List<Personne> findAllByNom(String nom);
+    List<Personne> findAllByPrenomAndNom(String prenom, String nom);
 }
