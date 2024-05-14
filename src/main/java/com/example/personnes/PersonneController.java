@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PersonneController {
 
+    //@Autowired
+    //private PersonneService personneService;
     @Autowired
-    private PersonneService personneService;
+    private PersonneDbService personneService;
 
     // GET /hello
     @GetMapping("/hello")
@@ -43,25 +46,24 @@ public class PersonneController {
     // exemple : /personnes/2
     @GetMapping("/personnes/{id}")
     public ResponseEntity<PersonneDTO> findById(@PathVariable("id") Integer id){
-        Personne p = personneService.findById(id);
-        if(p == null){
+        Optional<Personne> optional = personneService.findById(id);
+        if(optional.isEmpty()){
             return ResponseEntity.notFound().build();
+        }else {
+            return ResponseEntity.ok(PersonneMapper.toDTO(optional.get()));
         }
-
-        return ResponseEntity.ok(PersonneMapper.toDTO(p));
     }
 
     // DELETE /personnes/{id}
     @DeleteMapping("/personnes/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id){
-        Personne p = personneService.findById(id);
-        if(p == null){
+        Optional<Personne> optional = personneService.findById(id);
+        if(optional.isEmpty()){
             return ResponseEntity.notFound().build();
+        } else {
+            personneService.delete(id);
+            return ResponseEntity.ok().build();
         }
-
-        personneService.delete(id);
-        return ResponseEntity.ok().build();
-
     }
 
     // PUT /personnes/{id}
@@ -70,8 +72,8 @@ public class PersonneController {
         if(! id.equals(personne.getId()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
-        Personne p = personneService.findById(id);
-        if(p == null){
+        Optional<Personne> optional = personneService.findById(id);
+        if(optional.isEmpty()){
             return ResponseEntity.status(404).build();
         }
 
