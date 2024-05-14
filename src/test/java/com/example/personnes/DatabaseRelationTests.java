@@ -26,4 +26,32 @@ class DatabaseRelationTests {
 
 		adresseRepository.save(a);
 	}
+
+	@Test
+	void personneAvecAdresse(){
+		Optional<Adresse> optionalAdresse = adresseRepository.findById(1);
+		if(optionalAdresse.isPresent()){
+			Adresse adresse = optionalAdresse.get();
+
+			Optional<Personne> optionalPersonne = personneRepository.findById(1);
+			if(optionalPersonne.isPresent()){
+				Personne personne = optionalPersonne.get();
+
+				personne.setAdresse(adresse);
+
+				personneRepository.save(personne);
+			}
+
+		}
+	}
+
+	@Test
+	void lecturePersonneAvecAdresse(){
+		Optional<Personne> optional = personneRepository.findById(1);
+		if(optional.isPresent()){
+			Personne personne = optional.get();
+			Adresse adresse = personne.getAdresse();
+			System.out.println(adresse);
+		}
+	}
 }

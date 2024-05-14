@@ -13,8 +13,10 @@ public class Personne {
 
     private String prenom;
     private String nom;
-    //@JsonIgnore
     private String password;
+
+    @ManyToOne
+    private Adresse adresse;
 
     public Personne(String prenom, String nom) {
         this.prenom = prenom;
@@ -54,6 +56,14 @@ public class Personne {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 
     @Override
