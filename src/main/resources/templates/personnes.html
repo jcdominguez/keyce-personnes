@@ -7,6 +7,9 @@
 <body>
 <h1>Annuaire de Personnes</h1>
 
+<p th:if=" ${personnes.size()} < 1 ">Annuaire vide</p>
+<p th:if=" ${personnes.size()} > 0 " th:text=" 'Nombre de personnes : ' +  ${personnes.size()}"></p>
+
 <ul>
     <li th:each="p:${personnes}" th:text="${ p.getPrenom() + ' ' + p.nom }"></li>
 </ul>
