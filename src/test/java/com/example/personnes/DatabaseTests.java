@@ -38,4 +38,9 @@ class DatabaseTests {
 		}
 	}
 
+	@Test
+	void delete(){
+		personneRepository.deleteById(2);
+	}
+
 }
