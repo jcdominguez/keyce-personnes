@@ -43,4 +43,13 @@ class DatabaseTests {
 		personneRepository.deleteById(2);
 	}
 
+	@Test
+	void updateOK(){
+		Optional<Personne> optional = personneRepository.findById(1);
+		if(optional.isPresent()) {
+			Personne personne = optional.get();
+			personne.setNom("Tartempion");
+			personneRepository.save(personne);
+		}
+	}
 }
