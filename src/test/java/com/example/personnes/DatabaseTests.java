@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -26,6 +27,14 @@ class DatabaseTests {
 		else {
 			Personne personne = optional.get();
 			System.out.println(personne);
+		}
+	}
+
+	@Test
+	void findAll(){
+		List<Personne> persones = personneRepository.findAll();
+		for(Personne p: persones){
+			System.out.println(p);
 		}
 	}
 
